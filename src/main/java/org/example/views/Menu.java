@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class Menu {
     private CoffeeMachines coffeeMachines;
+    private View view = new View();
     private final Scanner scanner = new Scanner(System.in);
 
     public Menu() {
@@ -48,8 +49,7 @@ public class Menu {
             case 4 -> {
                 coffeeMachines.setCoffeeTank();
                 coffeeMachines.setWaterTank();
-                System.out.println("Кофе в баке: " + coffeeMachines.getCoffeeTank() +
-                        "\nВоды в баке: " + coffeeMachines.getWaterTank());
+                printTank1();
                 menu01();
             }
             default -> System.out.println("Неверно выбран пункт");
@@ -71,9 +71,7 @@ public class Menu {
                 coffeeMachines.setCoffeeTank();
                 coffeeMachines.setWaterTank();
                 coffeeMachines.setMilkTank();
-                System.out.println("Кофе в баке: " + coffeeMachines.getCoffeeTank() +
-                        "\nВоды в баке: " + coffeeMachines.getWaterTank() +
-                        "\nМолока в баке: " + coffeeMachines.getMilkTank());
+                printTank2();
                 menu02();
             }
             default -> System.out.println("Неверно выбран пункт");
@@ -95,9 +93,7 @@ public class Menu {
                 coffeeMachines.setCoffeeTank();
                 coffeeMachines.setWaterTank();
                 coffeeMachines.setMilkTank();
-                System.out.println("Кофе в баке: " + coffeeMachines.getCoffeeTank() +
-                        "\nВоды в баке: " + coffeeMachines.getWaterTank() +
-                        "\nМолока в баке: " + coffeeMachines.getMilkTank());
+                printTank2();
                 menu03();
             }
             default -> System.out.println("Неверно выбран пункт");
@@ -113,17 +109,13 @@ public class Menu {
                 menu01();
             }
             case 3 -> {
-                System.out.println("Эспрессо");
-                coffeeMachines.createEspresso();
-                System.out.println("Кофе в баке: " + coffeeMachines.getCoffeeTank() +
-                        "\nВоды в баке: " + coffeeMachines.getWaterTank());
+                errorEspressoCheck();
+                printTank1();
                 menu11();
             }
             case 4 -> {
-                System.out.println("Американо");
-                coffeeMachines.createAmericano();
-                System.out.println("Кофе в баке: " + coffeeMachines.getCoffeeTank() +
-                        "\nВоды в баке: " + coffeeMachines.getWaterTank());
+                errorAmericanoCheck();
+                printTank1();
                 menu11();
             }
             case 5 -> {
@@ -145,35 +137,23 @@ public class Menu {
                 menu02();
             }
             case 3 -> {
-                System.out.println("Эспрессо");
-                coffeeMachines.createEspresso();
-                System.out.println("Кофе в баке: " + coffeeMachines.getCoffeeTank() +
-                        "\nВоды в баке: " + coffeeMachines.getWaterTank() +
-                        "\nМолока в баке: " + coffeeMachines.getMilkTank());
+                errorEspressoCheck();
+                printTank2();
                 menu21();
             }
             case 4 -> {
-                System.out.println("Американо");
-                coffeeMachines.createAmericano();
-                System.out.println("Кофе в баке: " + coffeeMachines.getCoffeeTank() +
-                        "\nВоды в баке: " + coffeeMachines.getWaterTank() +
-                        "\nМолока в баке: " + coffeeMachines.getMilkTank());
+                errorAmericanoCheck();
+                printTank2();
                 menu21();
             }
             case 5 -> {
-                System.out.println("Латте");
-                coffeeMachines.createLatte();
-                System.out.println("Кофе в баке: " + coffeeMachines.getCoffeeTank() +
-                        "\nВоды в баке: " + coffeeMachines.getWaterTank() +
-                        "\nМолока в баке: " + coffeeMachines.getMilkTank());
+                errorLatteCheck();
+                printTank2();
                 menu21();
             }
             case 6 -> {
-                System.out.println("Капучино");
-                coffeeMachines.createCappuccino();
-                System.out.println("Кофе в баке: " + coffeeMachines.getCoffeeTank() +
-                        "\nВоды в баке: " + coffeeMachines.getWaterTank() +
-                        "\nМолока в баке: " + coffeeMachines.getMilkTank());
+                errorCappuccinoCheck();
+                printTank2();
                 menu21();
             }
             case 7 -> {
@@ -195,18 +175,13 @@ public class Menu {
                 menu03();
             }
             case 3 -> {
-                System.out.println("Американо");
-                coffeeMachines.createAmericano();
-                System.out.println("Кофе в баке: " + coffeeMachines.getCoffeeTank() +
-                        "\nВоды в баке: " + coffeeMachines.getWaterTank());
+                errorAmericanoCheck();
+                printTank2();
                 menu31();
             }
             case 4 -> {
-                System.out.println("Латте");
-                coffeeMachines.createLatte();
-                System.out.println("Кофе в баке: " + coffeeMachines.getCoffeeTank() +
-                        "\nВоды в баке: " + coffeeMachines.getWaterTank() +
-                        "\nМолока в баке: " + coffeeMachines.getMilkTank());
+                errorLatteCheck();
+                printTank2();
                 menu31();
             }
             case 5 -> {
@@ -271,6 +246,75 @@ public class Menu {
                 "5: Очистка отработанного кофе");
         coffeeMachineMenu3(scanner.nextInt());
     }
+
+    private void errorEspressoCheck() {
+        if (coffeeMachines.getCoffeeTank() - 22 < 0) {
+            view.errGroundedCoffee();
+        } else if (coffeeMachines.getWaterTank() - 30 < 0) {
+            view.errWater();
+        } else if (coffeeMachines.getUsedCoffeeTank() + 22 > coffeeMachines.getUsedCoffeeTankVolume()) {
+            view.errTankUsedCoffee();
+        } else {
+            System.out.println("Эспрессо");
+            coffeeMachines.createEspresso();
+        }
+    }
+
+    private void errorAmericanoCheck() {
+        if (coffeeMachines.getCoffeeTank() - 22 < 0) {
+            view.errGroundedCoffee();
+        } else if (coffeeMachines.getWaterTank() - 100 < 0) {
+            view.errWater();
+        } else if (coffeeMachines.getUsedCoffeeTank() + 22 > coffeeMachines.getUsedCoffeeTankVolume()) {
+            view.errTankUsedCoffee();
+        } else {
+            System.out.println("Американо");
+            coffeeMachines.createAmericano();
+        }
+    }
+
+    private void errorLatteCheck() {
+        if (coffeeMachines.getCoffeeTank() - 22 < 0) {
+            view.errGroundedCoffee();
+        } else if (coffeeMachines.getWaterTank() - 30 < 0) {
+            view.errWater();
+        } else if (coffeeMachines.getUsedCoffeeTank() + 22 > coffeeMachines.getUsedCoffeeTankVolume()) {
+            view.errTankUsedCoffee();
+        } else if (coffeeMachines.getMilkTank() - 40 < 0) {
+            view.errMilk();
+        } else {
+            System.out.println("Латте");
+            coffeeMachines.createAmericano();
+        }
+    }
+
+    private void errorCappuccinoCheck() {
+        if (coffeeMachines.getCoffeeTank() - 22 < 0) {
+            view.errGroundedCoffee();
+        } else if (coffeeMachines.getWaterTank() - 30 < 0) {
+            view.errWater();
+        } else if (coffeeMachines.getUsedCoffeeTank() + 22 > coffeeMachines.getUsedCoffeeTankVolume()) {
+            view.errTankUsedCoffee();
+        } else if (coffeeMachines.getMilkTank() - 70 < 0) {
+            view.errMilk();
+        } else {
+            System.out.println("Капучино");
+            coffeeMachines.createAmericano();
+        }
+    }
+
+    private void printTank1() {
+        System.out.println("Кофе в баке: " + coffeeMachines.getCoffeeTank() +
+                "\nВоды в баке: " + coffeeMachines.getWaterTank());
+    }
+
+    private void printTank2() {
+        System.out.println("Кофе в баке: " + coffeeMachines.getCoffeeTank() +
+                "\nВоды в баке: " + coffeeMachines.getWaterTank() +
+                "\nМолока в баке: " + coffeeMachines.getMilkTank());
+    }
+
+
 
     public void start(Menu menu) {
         menu.menuController();

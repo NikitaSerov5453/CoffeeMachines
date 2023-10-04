@@ -10,25 +10,27 @@ public class View {
 
     }
 
-    private void errWater() {
+    protected void errWater() {
         System.out.println(error.ERROR_WATER);
     }
 
-    private void errGroundedCoffee() {
+    protected void errGroundedCoffee() {
         System.out.println(error.ERROR_GROUND_COFFEE);
     }
 
-    private void errTankUsedCoffee() {
+    protected void errTankUsedCoffee() {
         System.out.println(error.ERROR_TANK_USED_COFFEE_IS_FULL);
     }
 
-    private void errMilk() {
+    protected void errMilk() {
         System.out.println(error.ERROR_MILK);
     }
 
-    private void errGrainCoffee() {
+    protected void errGrainCoffee() {
         System.out.println(error.ERROR_GRAIN_COFFEE);
     }
+
+
 
     public void err() {
 

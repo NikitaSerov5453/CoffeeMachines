@@ -17,6 +17,6 @@ public class Main {
         Menu menu = new Menu(coffee11);
         Menu menu1 = new Menu(coffee31);
         Menu menu2 = new Menu(coffee21);
-        view.start(menu2);
+        view.start(menu);
     }
 }

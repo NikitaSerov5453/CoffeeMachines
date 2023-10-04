@@ -284,7 +284,7 @@ public class Menu {
             view.errMilk();
         } else {
             System.out.println("Латте");
-            coffeeMachines.createAmericano();
+            coffeeMachines.createLatte();
         }
     }
 
@@ -299,7 +299,7 @@ public class Menu {
             view.errMilk();
         } else {
             System.out.println("Капучино");
-            coffeeMachines.createAmericano();
+            coffeeMachines.createCappuccino();
         }
     }
 
@@ -313,8 +313,6 @@ public class Menu {
                 "\nВоды в баке: " + coffeeMachines.getWaterTank() +
                 "\nМолока в баке: " + coffeeMachines.getMilkTank());
     }
-
-
 
     public void start(Menu menu) {
         menu.menuController();

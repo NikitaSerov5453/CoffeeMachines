@@ -22,7 +22,7 @@ public class Coffee31 extends CoffeeMachines{
         this.coffeeTankVolume = coffeeTankVolume;
         this.usedCoffeeTankVolume = usedCoffeeTankVolume;
         this.milkTankVolume = milkTankVolume;
-        this.grainCoffeeTank = grainCoffeeTankVolume;
+        this.grainCoffeeTankVolume = grainCoffeeTankVolume;
     }
 
     @Override
@@ -63,6 +63,7 @@ public class Coffee31 extends CoffeeMachines{
     @Override
     public void setCoffeeTank() {
         this.coffeeTank = coffeeTankVolume;
+        
     }
 
     @Override
@@ -143,5 +144,12 @@ public class Coffee31 extends CoffeeMachines{
     @Override
     public void setUsedCoffeeTankVolume(int usedCoffeeTankVolume) {
         this.usedCoffeeTankVolume = usedCoffeeTankVolume;
+    }
+    @Override
+    public void grindCoffee() {
+        if (coffeeTank - 22 < 0 && grainCoffeeTank >= 22) {
+            grainCoffeeTank -=22;
+            coffeeTank +=22;
+        }
     }
 }

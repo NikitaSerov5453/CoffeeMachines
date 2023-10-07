@@ -90,7 +90,7 @@ public class Menu {
                 return;
             }
             case 4 -> {
-                coffeeMachines.setCoffeeTank();
+                coffeeMachines.setGrainCoffeeTank();
                 coffeeMachines.setWaterTank();
                 coffeeMachines.setMilkTank();
                 printTank2();
@@ -175,12 +175,14 @@ public class Menu {
                 menu03();
             }
             case 3 -> {
-                errorAmericanoCheck();
+                coffeeMachines.grindCoffee();
+                errorAmericanoCheck1();
                 printTank2();
                 menu31();
             }
             case 4 -> {
-                errorLatteCheck();
+                coffeeMachines.grindCoffee();
+                errorLatteCheck1();
                 printTank2();
                 menu31();
             }
@@ -303,15 +305,54 @@ public class Menu {
         }
     }
 
+    private void errorAmericanoCheck1() {
+        if (coffeeMachines.getCoffeeTank() - 22 < 0 && coffeeMachines.getGrainCoffeeTank() < 22) {
+            view.errGroundedCoffee();
+        } else if (coffeeMachines.getWaterTank() - 100 < 0) {
+            view.errWater();
+        } else if (coffeeMachines.getUsedCoffeeTank() + 22 > coffeeMachines.getUsedCoffeeTankVolume()) {
+            view.errTankUsedCoffee();
+        } else {
+            System.out.println("Американо");
+            coffeeMachines.createAmericano();
+        }
+    }
+
+    private void errorLatteCheck1() {
+        if (coffeeMachines.getCoffeeTank() - 22 < 0 && coffeeMachines.getGrainCoffeeTank() < 22) {
+            view.errGroundedCoffee();
+        } else if (coffeeMachines.getWaterTank() - 30 < 0) {
+            view.errWater();
+        } else if (coffeeMachines.getUsedCoffeeTank() + 22 > coffeeMachines.getUsedCoffeeTankVolume()) {
+            view.errTankUsedCoffee();
+        } else if (coffeeMachines.getMilkTank() - 40 < 0) {
+            view.errMilk();
+        } else {
+            System.out.println("Латте");
+            coffeeMachines.createLatte();
+        }
+    }
+
     private void printTank1() {
         System.out.println("Кофе в баке: " + coffeeMachines.getCoffeeTank() +
                 "\nВоды в баке: " + coffeeMachines.getWaterTank());
     }
 
     private void printTank2() {
-        System.out.println("Кофе в баке: " + coffeeMachines.getCoffeeTank() +
-                "\nВоды в баке: " + coffeeMachines.getWaterTank() +
-                "\nМолока в баке: " + coffeeMachines.getMilkTank());
+        if (coffeeMachines.getGrainCoffeeTankVolume() == 0) {
+            System.out.println("Кофе в баке: " + coffeeMachines.getCoffeeTank() +
+                    "\nВоды в баке: " + coffeeMachines.getWaterTank() +
+                    "\nМолока в баке: " + coffeeMachines.getMilkTank());
+        } else {
+            System.out.println("Кофе в баке: " + coffeeMachines.getGrainCoffeeTank() +
+                    "\nВоды в баке: " + coffeeMachines.getWaterTank() +
+                    "\nМолока в баке: " + coffeeMachines.getMilkTank());
+        }
+    }
+
+    private void printTank() {
+        System.out.printf("%s%s", "Кофе в баке: " + coffeeMachines.getCoffeeTank(), "\nВоды в баке: " + coffeeMachines.getWaterTank() +
+                "\nМолока в баке: " + coffeeMachines.getMilkTank() + "\n");
     }
 
     public void start(Menu menu) {

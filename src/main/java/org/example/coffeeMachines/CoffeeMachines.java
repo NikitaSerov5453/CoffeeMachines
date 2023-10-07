@@ -154,4 +154,11 @@ public abstract class CoffeeMachines {
     public void setUsedCoffeeTank(int usedCoffeeTank) {
         this.usedCoffeeTank = usedCoffeeTank;
     }
+
+    public void grindCoffee() {
+        if (coffeeTank - 22 < 0 && grainCoffeeTank >= 22) {
+            grainCoffeeTank -=22;
+            coffeeTank +=22;
+        }
+    }
 }
